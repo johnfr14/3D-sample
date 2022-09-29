@@ -83,7 +83,7 @@ export default class Raycaster {
 
       const intersects = this.raycaster.intersectObjects(objs)
       
-      if (intersects.length === 1) {
+      if (intersects.length === 1 && this.world.wallet.network === "mumbai" && this.world.wallet.isConnected) {
         for (let loot of this.world.chest.loots) {
           if (loot.mesh.uuid === intersects[0].object.uuid) {
             let index = this.world.chest.loots.indexOf(loot)
