@@ -22,4 +22,3 @@
   },
   "include": ["src", "static"]
 }
-, "public/draco", "public/draco"
