@@ -25,7 +25,7 @@ export default class Raycaster {
       this.world.chest.model.traverse(child => {
         objs.push(child)
       })
-      const intersects = this.raycaster.intersectObject(objs[23])
+      const intersects = this.raycaster.intersectObject(objs[17])
 
       if (intersects.length) {
         if (action.paused) {
