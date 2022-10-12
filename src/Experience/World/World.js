@@ -9,10 +9,10 @@ export default class World {
 
     this.experience = experience;
     this.scene = experience.scene;
-    this.ressources = experience.ressources;
+    this.resources = experience.resources;
 
 
-    this.ressources.on("ready", () => {
+    this.resources.on("ready", () => {
       this.floor = new Floor(this.experience);
       this.fox = new Fox(this.experience);
       this.environment = new Environment(this.experience);

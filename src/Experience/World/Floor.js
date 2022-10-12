@@ -4,7 +4,7 @@ export default class Floor {
   constructor(experience) {
     this.experience = experience
     this.scene = experience.scene
-    this.ressources = experience.ressources
+    this.resources = experience.resources
 
     this.setGeometry()
     this.setTexture()
@@ -19,13 +19,13 @@ export default class Floor {
   setTexture() {
     this.textures = {}
 
-    this.textures.color = this.ressources.items.grassColorTexture
+    this.textures.color = this.resources.items.grassColorTexture
     this.textures.color.encoding = THREE.sRGBEncoding
     this.textures.color.repeat.set(1.5, 1.5);
     this.textures.color.wrapS = THREE.RepeatWrapping;
     this.textures.color.wrapT = THREE.RepeatWrapping;
 
-    this.textures.normal = this.ressources.items.grassNormalTexture
+    this.textures.normal = this.resources.items.grassNormalTexture
     this.textures.normal.repeat.set(1.5, 1.5);
     this.textures.normal.wrapS = THREE.RepeatWrapping;
     this.textures.normal.wrapT = THREE.RepeatWrapping;

@@ -3,7 +3,7 @@ export default class Environment {
   constructor(experience) {
     this.experience = experience
     this.scene = experience.scene
-    this.ressources = experience.ressources
+    this.resources = experience.resources
 
     this.setSunlight()
     this.setEnvironmentMap()
@@ -22,7 +22,7 @@ export default class Environment {
   setEnvironmentMap() {
     this.environmentMap = {}
     this.environmentMap.intensity = 0.4 
-    this.environmentMap.texture = this.ressources.items.environmentMapTexture
+    this.environmentMap.texture = this.resources.items.environmentMapTexture
     this.environmentMap.texture.encoding = THREE.sRGBEncoding
     
     this.scene.environment = this.environmentMap.texture

@@ -1,5 +1,5 @@
 import * as THREE from "three"
-import Experience from "./experience"
+import Experience from "./Experience"
 import Sizes from "./Utils/Sizes"
 import Camera from "./Camera"
 import { WebGL1Renderer } from "three"

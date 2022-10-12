@@ -5,9 +5,9 @@ export default class Chest {
   constructor(experience) {
     this.experience = experience
     this.scene = experience.scene
-    this.ressources = experience.ressources
+    this.resources = experience.resources
     this.time = experience.time
-    this.chestModel = this.ressources.items.chestModel
+    this.chestModel = this.resources.items.chestModel
     this.raycaster =  experience.raycaster
     this.debug = experience.debug
     this.originX = -2
@@ -22,7 +22,7 @@ export default class Chest {
   }
 
   setGLTF() {
-    this.model = this.ressources.items.chestModel.scene
+    this.model = this.resources.items.chestModel.scene
     this.model.position.x -= 2
     this.scene.add(this.model)
 
@@ -44,8 +44,8 @@ export default class Chest {
 
   setAudio() {
     this.audio = {}
-    this.audio.open = this.ressources.items.chestOpenSound
-    this.audio.close = this.ressources.items.chestCloseSound
+    this.audio.open = this.resources.items.chestOpenSound
+    this.audio.close = this.resources.items.chestCloseSound
   }
 
   setLoots() {

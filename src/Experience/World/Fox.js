@@ -4,9 +4,9 @@ export default class Floor {
   constructor(experience) {
     this.experience = experience
     this.scene = experience.scene
-    this.ressources = experience.ressources
+    this.resources = experience.resources
     this.time = experience.time
-    this.foxModel = this.ressources.items.foxModel
+    this.foxModel = this.resources.items.foxModel
     this.debug = experience.debug
 
     if(this.debug.active)
@@ -17,7 +17,7 @@ export default class Floor {
   }
 
   setGLTF() {
-    this.model = this.ressources.items.foxModel.scene
+    this.model = this.resources.items.foxModel.scene
     this.model.scale.set(0.02, 0.02, 0.02)
     this.model.position.z += 4
     this.model.rotation.y = Math.PI
