@@ -1,7 +1,9 @@
 import * as THREE from "three";
 import EventEmitter from "./EventEmitter";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import {FontLoader} from "three/examples/jsm/loaders/FontLoader.js";
+import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
+import PreLoader from "../PreLoader";
+import Experience from "../Experience";
 
 type Sources = {
   name: string, 
@@ -19,46 +21,53 @@ type Loaders = {
 }
 
 export default class Resources extends EventEmitter {
+  experience: Experience
+  preloader: PreLoader
+
   sources: Sources[]
   items: {[key: string]: any}
+  loadingManager!: THREE.LoadingManager
   toLoad: number;
   loaded: number = 0
-  loaders: Loaders
+  loaders!: Loaders
 
   constructor(sources: Sources[]) {
     super()
+
+    this.experience = Experience.Instance()
+    this.preloader = this.experience.preLoader
+
     this.sources = sources
     this.items = {}
     this.toLoad = this.sources.length;
 
-    this.loaders = this.setLoaders()
+    this.setLoaders()
     this.startLoading()
   }
 
-  setLoaders(): Loaders {
-    let loaders = {
-      fontLoader: new FontLoader(),
-      gltfLoader: new GLTFLoader(),
-      textureLoader: new THREE.TextureLoader(),
-      cubeTextureLoader: new THREE.CubeTextureLoader(),
+  setLoaders() {
+    this.loaders = {
+      fontLoader: new FontLoader(this.loadingManager),
+      gltfLoader: new GLTFLoader(this.loadingManager),
+      textureLoader: new THREE.TextureLoader(this.loadingManager),
+      cubeTextureLoader: new THREE.CubeTextureLoader(this.loadingManager),
       listener: new THREE.AudioListener(),
-      audioLoader: new THREE.AudioLoader()
+      audioLoader: new THREE.AudioLoader(this.loadingManager)
     }
-    return loaders
   }
 
   startLoading() {
     for (const source of this.sources) {
       if (source.type === "gltfModel")
-        this.loaders.gltfLoader.load(source.path, (file) => this.sourcesLoaded(source, file))
+        this.loaders.gltfLoader.load(source.path, (file: unknown) => this.sourcesLoaded(source, file))
       if (source.type === "texture")
-        this.loaders.textureLoader.load(source.path, (file) => this.sourcesLoaded(source, file))
+        this.loaders.textureLoader.load(source.path, (file: unknown) => this.sourcesLoaded(source, file))
       if (source.type === "cubeTexture")
-        this.loaders.cubeTextureLoader.load(source.path, (file) => this.sourcesLoaded(source, file))
+        this.loaders.cubeTextureLoader.load(source.path, (file: unknown) => this.sourcesLoaded(source, file))
       if (source.type === "font")
-        this.loaders.fontLoader.load(source.path, (file) => this.sourcesLoaded(source, file))
+        this.loaders.fontLoader.load(source.path, (file: unknown) => this.sourcesLoaded(source, file))
       if (source.type === "sound")
-        this.loaders.audioLoader.load(source.path, (file) => this.audioLoad(source, file))
+        this.loaders.audioLoader.load(source.path, (file: any) => this.audioLoad(source, file))
     }
   }
 
@@ -70,9 +79,8 @@ export default class Resources extends EventEmitter {
     this.sourcesLoaded(source, sound)
   }
 
-  sourcesLoaded(source: Sources, file: any) {
+  sourcesLoaded(source: Sources, file: unknown) {
     this.trigger('itemLoaded')
-    console.log(this.loaded, this.toLoad)
 
     this.items[source.name] = file
     this.loaded++;
