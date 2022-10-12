@@ -9,6 +9,7 @@ import Resources from "./Utils/Resources"
 import Debug from "./Utils/Debug"
 import Mouse from "./Utils/Mouse"
 import Raycaster from "./Utils/Raycaster"
+import PreLoader from "./PreLoader"
 
 declare global {
   interface Window { experience: any }
@@ -23,6 +24,7 @@ export default class Experience {
   time: Time
   scene: THREE.Scene
   resources: Resources
+  preLoader: PreLoader
   mouse: Mouse
   camera: Camera
   renderer: Renderer
@@ -30,6 +32,7 @@ export default class Experience {
   raycaster: Raycaster
   
   constructor(canvas: HTMLCanvasElement) {
+    Experience._instance = this
      
     // Global access
     window.experience = this
@@ -40,6 +43,7 @@ export default class Experience {
     this.time = new Time()
     this.scene = new THREE.Scene()
     this.resources = new Resources(sources)
+    this.preLoader = new PreLoader()
     this.mouse = new Mouse(this)
     this.camera = new Camera(this)
     this.renderer = new Renderer(this)
@@ -49,24 +53,22 @@ export default class Experience {
     this.sizes.on('resize', () => this.resize())
     this.time.on("tick", () => this.update())
 
-    Experience._instance = this
   }
 
   resize(): void {
-    this.camera!.resize()
-    this.renderer!.resize()
+    this.camera.resize()
+    this.renderer.resize()
   }
 
   update(): void {
-    this.raycaster!.update()
-    this.camera!.update()
-    this.world!.update()
-    this.renderer!.update()
+    this.raycaster.update()
+    this.camera.update()
+    this.world.update()
+    this.renderer.update()
   }
 
   public static Instance(canvas?: HTMLCanvasElement)
   {
-      // Do you need arguments? Make it a regular static method instead.
       return this._instance || (this._instance = new this(canvas!));
   }
 }
