@@ -8,7 +8,7 @@ export default class Alchemicas {
 
   constructor(chest, type) {
     this.chest = chest
-    this.ressources = chest.ressources;
+    this.resources = chest.resources;
     this.scene = chest.scene;
     this.out = false
     this.type = type
@@ -28,10 +28,10 @@ export default class Alchemicas {
   setTexture(type) {
     this.textures = {}
     this.textures.type = {
-      kek: this.ressources.items.kekColorTexture,
-      alpha: this.ressources.items.alphaColorTexture,
-      fomo: this.ressources.items.fomoColorTexture,
-      fud: this.ressources.items.fudColorTexture,
+      kek: this.resources.items.kekColorTexture,
+      alpha: this.resources.items.alphaColorTexture,
+      fomo: this.resources.items.fomoColorTexture,
+      fud: this.resources.items.fudColorTexture,
     }
     
     this.textures.color = this.textures.type[type]
@@ -39,7 +39,7 @@ export default class Alchemicas {
     this.textures.color.wrapS = THREE.RepeatWrapping;
     this.textures.color.wrapT = THREE.RepeatWrapping;
 
-    this.textures.normal = this.ressources.items.grassNormalTexture
+    this.textures.normal = this.resources.items.grassNormalTexture
     this.textures.normal.repeat.set(1.5, 1.5);
     this.textures.normal.wrapS = THREE.RepeatWrapping;
     this.textures.normal.wrapT = THREE.RepeatWrapping;
@@ -59,7 +59,7 @@ export default class Alchemicas {
     this.textGeometry = new TextGeometry(
       this.type, 
       {
-        font: this.ressources.items.minecraft, 
+        font: this.resources.items.minecraft, 
         size: 0.2, 
         height: 0.2,
         curveSegments: 1,
@@ -71,7 +71,7 @@ export default class Alchemicas {
       }
   )
   this.textGeometry.center()
-  this.textMaterial = new THREE.MeshMatcapMaterial({matcap: this.ressources.items.metalMatcapTexture, map: this.textures.color})
+  this.textMaterial = new THREE.MeshMatcapMaterial({matcap: this.resources.items.metalMatcapTexture, map: this.textures.color})
   // textMaterial.wireframe = true
   this.text = new THREE.Mesh(this.textGeometry, this.textMaterial)
   }

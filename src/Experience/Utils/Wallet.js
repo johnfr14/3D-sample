@@ -8,7 +8,7 @@ export default class Wallet {
     this.ethereum = window.ethereum
     this.provider = new ethers.providers.Web3Provider(window.ethereum);
     this.scene = experience.scene
-    this.ressources = experience.ressources;
+    this.resources = experience.resources;
     this.isConnected = false
     this.network = ""
 
@@ -23,7 +23,7 @@ export default class Wallet {
     const textGeometry = new TextGeometry(
       text, 
       {
-        font: this.ressources.items.aovel, 
+        font: this.resources.items.aovel, 
         size: 0.5,
         height: 0.2,
         curveSegments: 12,

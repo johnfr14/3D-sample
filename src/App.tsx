@@ -1,10 +1,11 @@
 import { useEffect } from "react";
-import Experience from "./Experience/experience";
+import Experience from "./Experience/Experience";
 
 function App() {
 
   useEffect(() => {
-    new Experience(document.querySelector('canvas.webgl')!)
+    let canvas: HTMLCanvasElement = document.querySelector('canvas.webgl')!
+    Experience.Instance(canvas)
   }, [])
   
   return (
