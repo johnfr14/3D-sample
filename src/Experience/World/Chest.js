@@ -7,7 +7,7 @@ export default class Chest {
     this.scene = experience.scene
     this.resources = experience.resources
     this.time = experience.time
-    this.chestModel = this.resources.items.chestModel
+    this.singleChestModel = this.resources.items.singleChestModel
     this.raycaster =  experience.raycaster
     this.debug = experience.debug
     this.originX = -2
@@ -22,7 +22,7 @@ export default class Chest {
   }
 
   setGLTF() {
-    this.model = this.resources.items.chestModel.scene
+    this.model = this.resources.items.singleChestModel.scene
     this.model.position.x -= 2
     this.scene.add(this.model)
 
@@ -37,7 +37,7 @@ export default class Chest {
     this.animation.mixer = new THREE.AnimationMixer(this.model)
     
     this.animation.action = {}
-    this.animation.action.open = this.animation.mixer.clipAction(this.chestModel.animations[0])
+    this.animation.action.open = this.animation.mixer.clipAction(this.singleChestModel.animations[0])
     this.animation.action.current = this.animation.action.open
 
   }
