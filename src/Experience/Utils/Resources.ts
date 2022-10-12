@@ -18,7 +18,7 @@ type Loaders = {
   audioLoader: THREE.AudioLoader
 }
 
-export default class Ressources extends EventEmitter {
+export default class Resources extends EventEmitter {
   sources: Sources[]
   items: {[key: string]: any}
   toLoad: number;
@@ -71,6 +71,9 @@ export default class Ressources extends EventEmitter {
   }
 
   sourcesLoaded(source: Sources, file: any) {
+    this.trigger('itemLoaded')
+    console.log(this.loaded, this.toLoad)
+
     this.items[source.name] = file
     this.loaded++;
 
