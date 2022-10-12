@@ -57,6 +57,11 @@ export const sources = [
     path: "models/Chest/glTF/Chest.gltf"
   },
   {
+    name: "singleChestModel",
+    type: "gltfModel",
+    path: "models/Chest/glTF/SingleChest.gltf"
+  },
+  {
     name: "chestOpenSound",
     type: "sound",
     path: "sounds/chest/openning-chest.mp3"
