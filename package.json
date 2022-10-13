@@ -50,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "@types/howler": "^2.2.7",
     "@types/three": "^0.144.0"
   }
 }
